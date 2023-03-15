@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.border input:focus-within~label,
+.border select:focus-within~label,
+.border input:not(:placeholder-shown)~label {
+    @apply transform text-[12px] leading-[12px] -translate-y-[6px] my-0;
+}
