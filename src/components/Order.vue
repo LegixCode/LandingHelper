@@ -67,7 +67,7 @@ const order_template = computed(() => {
     `;
     template += getPPTemplate(pp.value).replaceAll(/{(\w)+}/g, (match) => {
         if (match == "{success_page}")
-            return `header("Location: success.php?pixel=" . $_POST["pixel"] . "&name=" . $_POST["name"] . "&phone=" . $_POST["phone"] . "&referer=" . $_SERVER['HTTP_REFERER']);`;
+            return `header("Location: success.php?pixel=" . urlencode($_POST["pixel"]) . "&name=" . urlencode($_POST["name"]) . "&phone=" . urlencode($_POST["phone"]) . "&referer=" . urlencode($_SERVER['HTTP_REFERER']));`;
         if (match == "{write_log}") return write_log.value ? `write_log(json_encode($request_params), $result);` : "";
         var _match = match.substring(1, match.length - 1);
         if (pp_subs.value[_match] !== undefined)
