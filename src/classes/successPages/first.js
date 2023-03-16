@@ -1,6 +1,6 @@
 export const first = {
     name: "first",
-    preview: "previews/first.png",
+    preview: "previews/first.jpg",
     translates: {
         ar: {
             t1: "شكرًا لك!",
@@ -35,7 +35,7 @@ export const first = {
         hu: {
             t1: "Köszönöm!",
             t2: "Megrendelését elfogadtuk!",
-            t3: "Egy szakember felveszi Önnel a kapcsolatot és megerősíti a megrendelés részleteit."
+            t3: "Egy szakember felveszi Önnel a kapcsolatot és megerősíti a megrendelés részleteit.",
         },
         id: {
             t1: "Terima kasih!",

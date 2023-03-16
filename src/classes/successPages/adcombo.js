@@ -1,8 +1,8 @@
 export const adcombo = {
-	name: 'adcombo',
-    preview: "previews/adcombo.png",
+    name: "adcombo",
+    preview: "previews/adcombo.jpg",
     translates: {
-		ar: {
+        ar: {
             t1: "",
             t2: "شكرًا لك على طلبك!",
             t3: "أنت على المسار الصحيح!",
@@ -10,8 +10,8 @@ export const adcombo = {
             t5: "يرجى التحقق من معلومات الاتصال الخاصة بك",
             t6: "الهاتف",
             t7: "إذا قمت بخطأ ما, عد مرة أخرى واملأ النموذج من جديد",
-		},
-		cs: {
+        },
+        cs: {
             t1: "DĚKUJI!",
             t2: "děkujeme za vaši objednávku!",
             t3: "Je to na dobré cestě!",
@@ -19,8 +19,8 @@ export const adcombo = {
             t5: "Prosím zkontrolujte si své kontaktní údaje",
             t6: "Telefon",
             t7: "Pokud jste udělali chybu, vraťte se k formuláři a vyplňte jej znovu.",
-		},
-		de: {
+        },
+        de: {
             t1: "DANKE!",
             t2: "danke für Ihre Bestellung!",
             t3: "Sie sind auf dem richtigen Weg!",
@@ -28,7 +28,7 @@ export const adcombo = {
             t5: "Bitte überprüfen Sie Ihre Kontaktinformationen",
             t6: "Telefon",
             t7: "Wenn Sie einen Fehler gemacht haben, gehen Sie zurück und füllen Sie das Formular erneut aus.",
-		},
+        },
         en: {
             t1: "THANK YOU!",
             t2: "thank you for your order!",
@@ -47,7 +47,7 @@ export const adcombo = {
             t6: "Teléfono",
             t7: "Si cometiste un error, regresa y completa el formulario nuevamente.",
         },
-		fr: {
+        fr: {
             t1: "MERCI!",
             t2: "merci pour votre commande!",
             t3: "Il ne reste plus que quelques étapes!",
@@ -55,8 +55,8 @@ export const adcombo = {
             t5: "Veuillez vérifier vos coordonnées",
             t6: "Téléphone",
             t7: "En cas d’erreur, revenez en arrière et remplissez le formulaire à nouveau.",
-		},
-		hu: {
+        },
+        hu: {
             t1: "KÖSZÖNÖM!",
             t2: "köszönjük a rendelésed!",
             t3: "Jó úton jársz!",
@@ -64,8 +64,8 @@ export const adcombo = {
             t5: "Kérjük, ellenőrizd elérhetőségeid",
             t6: "Telefon",
             t7: "Ha hibát vétettél, menj vissza, és töltsd ki újra az űrlapot.",
-		},
-		id: {
+        },
+        id: {
             t1: "TERIMA KASIH!",
             t2: "terima kasih atas pemesanan Anda!",
             t3: "Anda berada di jalur yang benar!",
@@ -73,17 +73,17 @@ export const adcombo = {
             t5: "Silakan periksa informasi kontak Anda",
             t6: "Telepon",
             t7: "Jika Anda melakukan kesalahan, kembali dan isi formulirnya lagi.",
-		},
-		it: {
+        },
+        it: {
             t1: "GRAZIE!",
             t2: "grazie per il tuo ordine!",
             t3: "Sei sulla buona strada!",
             t4: "Il tuo pacco sta per essere spedito. Assicurati di aver indicato correttamente il tuo numero di telefono e di rispondere alla chiamata per confermare i dettagli da parte del nostro responsabile.",
-			t5: "Ti preghiamo di verificare le tue informazioni di contatto:",
+            t5: "Ti preghiamo di verificare le tue informazioni di contatto:",
             t6: "Telefono",
             t7: "Se hai fatto un errore, torna indietro e compila nuovamente il modulo.",
-		},
-		ms: {
+        },
+        ms: {
             t1: "TERIMA KASIH!",
             t2: "terima kasih atas pesanan anda!",
             t3: "Anda berada di landasan yang betul!",
@@ -91,8 +91,8 @@ export const adcombo = {
             t5: "Sila periksa maklumat hubungan anda",
             t6: "Telefon",
             t7: "Sekiranya anda melakukan kesilapan, kembali dan isi semula borang.",
-		},
-		pl: {
+        },
+        pl: {
             t1: "DZIĘKUJĘ!",
             t2: "dziękujemy za złożenie zamówienia!",
             t3: "Zmierzasz we właściwym kierunku!",
@@ -100,8 +100,8 @@ export const adcombo = {
             t5: "Prosimy sprawdzić swoje dane kontaktowe",
             t6: "Telefon",
             t7: "Jeśli podano błędne dane, należy wrócić i ponownie wypełnić formularz.",
-		},
-		pt: {
+        },
+        pt: {
             t1: "OBRIGADO!",
             t2: "obrigado pela sua encomenda!",
             t3: "Está no caminho certo!",
@@ -109,8 +109,8 @@ export const adcombo = {
             t5: "Verifique a sua informação de contacto",
             t6: "Telefone",
             t7: "Se cometeu um erro, volte atrás e preencha novamente o formulário.",
-		},
-		ro: {
+        },
+        ro: {
             t1: "MULȚUMESC!",
             t2: "vă mulțumim pentru comanda dvs.!",
             t3: "Sunteți pe calea cea dreaptă!",
@@ -118,7 +118,7 @@ export const adcombo = {
             t5: "Vă rugăm să verificați informațiile de contact",
             t6: "Telefon",
             t7: "Dacă ați greșit, mergeți înapoi și completați din nou formularul.",
-		},
+        },
         tr: {
             t1: "TEŞEKKÜR EDERİM!",
             t2: "siparişiniz için teşekkürler!",
