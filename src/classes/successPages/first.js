@@ -32,6 +32,11 @@ export const first = {
             t2: "Votre commande a été acceptée!",
             t3: "Un spécialiste vous contactera et confirmera les détails de la commande.",
         },
+        hi: {
+            t1: "आपको धन्यवाद!",
+            t2: "आपका आदेश स्वीकार कर लिया गया है!",
+            t3: "एक विशेषज्ञ आपसे संपर्क करेगा और ऑर्डर विवरण की पुष्टि करेगा।",
+        },
         hu: {
             t1: "Köszönöm!",
             t2: "Megrendelését elfogadtuk!",
@@ -71,11 +76,6 @@ export const first = {
             t1: "Teşekkürler!",
             t2: "Siparişiniz kabul edilmiştir!",
             t3: "Bir uzman sizinle iletişime geçecek ve sipariş detaylarını teyit edecek.",
-        },
-        hi: {
-            t1: "आपको धन्यवाद!",
-            t2: "आपका आदेश स्वीकार कर लिया गया है!",
-            t3: "एक विशेषज्ञ आपसे संपर्क करेगा और ऑर्डर विवरण की पुष्टि करेगा।",
         },
         sq: {
             t1: "Хвал!",
