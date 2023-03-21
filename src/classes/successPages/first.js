@@ -57,6 +57,11 @@ export const first = {
             t2: "Pesanan anda telah diterima!",
             t3: "Pakar akan menghubungi anda dan mengesahkan butiran pesanan.",
         },
+        ne: {
+            t1: "धन्यवाद!",
+            t2: "तपाईको अर्डर स्वीकार गरिएको छ!",
+            t3: "एक विशेषज्ञले तपाईंलाई अर्डर विवरणहरू पुष्टि गर्न सम्पर्क गर्नेछ।",
+        },
         pl: {
             t1: "Dziękuję!",
             t2: "Twoje zamówienie zostało przyjęte!",

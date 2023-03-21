@@ -100,6 +100,7 @@ const order_template = computed(() => {
                     <option value="leadreaktor">LeadReaktor</option>
                     <option value="leadrock">LeadRock</option>
                     <option value="lemonad">Lemonad</option>
+                    <option value="shakes">Shakes</option>
                     <option value="trafficlight">TrafficLight</option>
                 </Select>
                 <PPParams :pp="pp" v-model:prop_values="prop_values" />

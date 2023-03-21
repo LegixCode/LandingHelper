@@ -4,6 +4,7 @@ import { lemonad } from "./pp/lemonad";
 import { adcombo } from "./pp/adcombo";
 import { trafficlight } from "./pp/trafficlight";
 import { kma } from "./pp/kma";
+import { shakes } from "./pp/shakes";
 
 export function getPPProps(name) {
     return getPPField(name, "props");
@@ -31,5 +32,7 @@ function getPPField(pp_name, field) {
             return trafficlight[field];
         case "kma":
             return kma[field];
+        case "shakes":
+            return shakes[field];
     }
 }
