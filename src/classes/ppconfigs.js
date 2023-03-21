@@ -3,6 +3,7 @@ import { leadrock } from "./pp/leadrock";
 import { lemonad } from "./pp/lemonad";
 import { adcombo } from "./pp/adcombo";
 import { trafficlight } from "./pp/trafficlight";
+import { kma } from "./pp/kma";
 
 export function getPPProps(name) {
     return getPPField(name, "props");
@@ -28,5 +29,7 @@ function getPPField(pp_name, field) {
             return leadreaktor[field];
         case "trafficlight":
             return trafficlight[field];
+        case "kma":
+            return kma[field];
     }
 }

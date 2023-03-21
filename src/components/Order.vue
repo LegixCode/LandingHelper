@@ -58,7 +58,7 @@ const order_template = computed(() => {
                 $fp = fopen($filename, 'a');
             } else {
                 $fp = fopen($filename, 'a');
-                fwrite($fp, '<?php exit; ?>\\n');
+                fwrite($fp, "<?php exit; ?>\\n");
             }
             $date_now = date('Y-m-d H:i:s');
             fwrite($fp, "Date: {$date_now}\\nRequest: {$request}\\nResponse: {$response}\\n\\n=====================\\n\\n");
@@ -96,6 +96,7 @@ const order_template = computed(() => {
             <div class="flex flex-col">
                 <Select label="ПП" v-model="pp">
                     <option value="adcombo">AdCombo</option>
+                    <option value="kma">KMA</option>
                     <option value="leadreaktor">LeadReaktor</option>
                     <option value="leadrock">LeadRock</option>
                     <option value="lemonad">Lemonad</option>
