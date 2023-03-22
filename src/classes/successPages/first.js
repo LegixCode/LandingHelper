@@ -27,6 +27,11 @@ export const first = {
             t2: "Ihre Bestellung wurde angenommen!",
             t3: "Ein Spezialist wird sich mit Ihnen in Verbindung setzen und die Bestelldetails bestätigen.",
         },
+        fl: {
+            t1: "Salamat!",
+            t2: "Ang iyong order ay tinanggap!",
+            t3: "Makikipag-ugnayan sa iyo ang isang espesyalista at kumpirmahin ang mga detalye ng order.",
+        },
         fr: {
             t1: "Merci!",
             t2: "Votre commande a été acceptée!",
