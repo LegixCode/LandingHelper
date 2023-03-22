@@ -61,8 +61,8 @@
 
     {write_log}
 
-    $array = json_decode($return, true);
-    if (isset($array['msg']) && $array['msg'] == "error") {
+    $result = json_decode($result, true);
+    if (!isset($result['response'], $result['response']['msg']) || $result['response']['msg'] != "success") {
         header('Location: ' . $_SERVER['HTTP_REFERER']);
         exit;
     } 
