@@ -1,6 +1,7 @@
 <script setup>
 import { toClipboard } from "@soerenmartius/vue3-clipboard";
 import { onMounted, reactive, watch, ref, computed } from "vue";
+import saveFile from "@/classes/saveFile.js";
 import {
     getSuccessPagePreviews,
     success_page_names,
@@ -12,7 +13,6 @@ import Button from "./ui/Button.vue";
 import Select from "./ui/Select.vue";
 import Toggle from "./ui/Toggle.vue";
 
-const load_tag = ref(null);
 const available_languages = getAvailableLanguages().sort((a, b) => languages[a] > languages[b] ? 1 : -1);
 
 const config = reactive({
@@ -71,19 +71,19 @@ function setCompletedTemplate() {
             if (!config.fb_pixel) return "";
             else
                 return `
-            <!-- Facebook Pixel Code -->
-            \<script>
-            !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-            n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-            document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    <!-- Facebook Pixel Code -->
+    \<script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
 
-            fbq('init', '<?= $_REQUEST["pixel"]; ?>');
-            fbq('track', 'Lead');
-            \<\/script>
-            <img height="1" width="1" src="https://www.facebook.com/tr?id=<?= $_REQUEST['pixel']; ?>&ev=Lead&noscript=1" />
-            <!-- End Facebook Pixel Code -->
+    fbq('init', '<?= $_REQUEST["pixel"]; ?>');
+    fbq('track', 'Lead');
+    \<\/script>
+    <img height="1" width="1" src="https://www.facebook.com/tr?id=<?= $_REQUEST['pixel']; ?>&ev=Lead&noscript=1" />
+    <!-- End Facebook Pixel Code -->
         `;
         if (match == "{name}") return '<?= $_REQUEST["name"]; ?>';
         if (match == "{phone}") return '<?= $_REQUEST["phone"]; ?>';
@@ -97,16 +97,10 @@ function copy_page() {
 }
 function load_page() {
     setCompletedTemplate();
-    setTimeout(() => load_tag.value.click(), 1);
+    saveFile('success.php', completed_template.value);
 }
 </script>
 <template>
-    <a
-        :href="'data:attachment/text,' + encodeURIComponent(completed_template)"
-        target="_blank"
-        download="success.php"
-        ref="load_tag"
-    ></a>
     <div class="flex flex-col lg:grid lg:grid-cols-3 gap-6 p-6">
         <div class="rounded-lg shadow-card border border-slate-100 p-6 col-span-2">
             <div class="flex gap-3 pb-6 items-center">

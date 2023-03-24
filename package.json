@@ -11,6 +11,7 @@
     "@soerenmartius/vue3-clipboard": "^0.1.2",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.21",
+    "terser": "^5.16.8",
     "vue": "^3.2.47"
   },
   "devDependencies": {

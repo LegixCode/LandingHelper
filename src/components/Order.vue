@@ -2,13 +2,12 @@
 import Select from "@/components/ui/Select.vue";
 import Button from "@/components/ui/Button.vue";
 import Toggle from "@/components/ui/Toggle.vue";
+import saveFile from "@/classes/saveFile.js";
 import { getPPTemplate } from "@/classes/ppconfigs.js";
 import { toClipboard } from "@soerenmartius/vue3-clipboard";
-import { computed, ref, watch } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import PPParams from "./PPParams.vue";
 import PPSubs from "./PPSubs.vue";
-import prettier from "prettier/standalone";
-import phpPlugin from "@prettier/plugin-php/standalone";
 
 const pp = ref(localStorage.getItem("pp") ?? "leadrock");
 watch(
@@ -26,23 +25,6 @@ const config = computed(() => {
           .join("\n")}
     ];`;
 });
-const order_file = computed(() => {
-    try {
-        return prettier.format("<?php\n" + config.value + "\n" + order_template.value, {
-            plugins: [phpPlugin],
-            parser: "php",
-            printWidth: 120,
-        });
-    } catch {}
-});
-const load_tag = ref(null);
-function load_order_file() {
-    setTimeout(() => load_tag.value.click(), 1);
-}
-
-function copy_order_file() {
-    toClipboard(order_file.value);
-}
 
 const order_template = computed(() => {
     var template = `
@@ -76,16 +58,33 @@ const order_template = computed(() => {
     });
     return template;
 });
+
+const order_file = ref("");
+function format() {
+    import("prettier/standalone").then((prettier) => {
+        import("@prettier/plugin-php/standalone").then((phpPlugin) => {
+            order_file.value = prettier.format("<?php\n" + config.value + "\n" + order_template.value, {
+                plugins: [phpPlugin],
+                parser: "php",
+                printWidth: 120,
+            });
+        });
+    });
+}
+onMounted(() => {
+    watch(() => config.value, format);
+    watch(() => order_template.value, format);
+    format();
+});
 </script>
 <template>
-    <a :href="'data:attachment/text,' + encodeURIComponent(order_file)" target="_blank" download="order.php" ref="load_tag"></a>
     <div class="flex flex-col lg:grid lg:grid-cols-3 gap-6 p-6">
         <div class="col-span-2">
             <div class="rounded-lg shadow-card border border-slate-100">
                 <div class="flex gap-3 px-6 pt-6 pb-3 items-center">
                     <div class="font-bold">order.php</div>
-                    <Button color="purple" @click="copy_order_file" class="ml-auto">Скопировать</Button>
-                    <Button color="green" @click="load_order_file">Скачать</Button>
+                    <Button color="purple" @click="toClipboard(order_file)" class="ml-auto">Скопировать</Button>
+                    <Button color="green" @click="saveFile('order.php', order_file)">Скачать</Button>
                 </div>
                 <div class="max-h-[450px] overflow-y-scroll px-6 pt-3 pb-6">
                     <pre class="text-xs"> {{ order_file }}</pre>
