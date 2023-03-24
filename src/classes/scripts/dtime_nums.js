@@ -10,22 +10,22 @@ export function getDTimeNums(format) {
     var _format = "";
     switch (format) {
         case "DD.MM.YYYY":
-            _format = "`${day}.${month}.${date.getFullYear()}`";
+            _format = "day + '.' + month + '.' + date.getFullYear()";
             break;
         case "DD/MM/YYYY":
-            _format = "`${day}/${month}/${date.getFullYear()}`";
+            _format = "day + '/' + month + '/' + date.getFullYear()";
             break;
         case "DD-MM-YYYY":
-            _format = "`${day}-${month}-${date.getFullYear()}`";
+            _format = "day + '-' + month + '-' + date.getFullYear()";
             break;
         case "YYYY-MM-DD":
-            _format = "`${date.getFullYear()}-${month}-${day}`";
+            _format = "date.getFullYear() + '-' + month + '-' + day";
             break;
         case "MM-DD-YYYY":
-            _format = "`${month}-${day}-${date.getFullYear()}`";
+            _format = "month + '-' + day + '-' + date.getFullYear()";
             break;
         case "MM/DD/YYYY":
-            _format = "`${month}/${day}/${date.getFullYear()}`";
+            _format = "month + '/' + day + '/' + date.getFullYear()";
             break;
     }
     return dtime_nums.replace("{format}", _format);

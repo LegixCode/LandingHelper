@@ -9,7 +9,7 @@ function copy() {
 }
 </script>
 <template>
-    <div class="shadow-card p-6 space-y-3">
+    <div class="shadow-card rounded-lg p-6 space-y-3">
         <div class="flex flex-wrap items-center">
             <div class="font-bold">simple_timer.js</div>
             <Button color="purple" @click="copy" class="ml-auto">Скопировать</Button>

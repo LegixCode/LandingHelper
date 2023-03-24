@@ -22,7 +22,7 @@ function copy() {
 }
 </script>
 <template>
-    <div class="shadow-card p-6 space-y-3">
+    <div class="shadow-card rounded-lg p-6 space-y-3">
         <div class="flex flex-wrap items-center">
             <div class="font-bold">dtime_nums.js</div>
             <Select label="Форматы даты" v-model="format" class="ml-auto !border-0 !mt-0 !-mb-3">
@@ -54,7 +54,7 @@ function copy() {
         </div>
         <div class="text-[13px] text-slate-600 indent-8">
             Функция <b>dtime_nums</b> в качестве параметров принимает количество дней которые требуется отнять или
-            прибавить к текущей дате (0 - сегодня, 1 - завтра, -2 - позовчера и т.д.). Что бы вывести дату, встаьте код
+            прибавить к текущей дате (0 - сегодня, 1 - завтра, -2 - позавчера и т.д.). Что бы вывести дату, встаьте код
             в нужное место как на примере ниже.
         </div>
         <div class="text-[13px] p-3 bg-slate-200/70 rounded-lg w-full relative group">
