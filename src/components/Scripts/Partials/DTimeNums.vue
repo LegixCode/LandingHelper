@@ -38,11 +38,11 @@ function copy() {
                 <Button color="green" @click="save">Скачать</Button>
             </div>
         </div>
-        <div class="text-sm text-slate-600 indent-8">
+        <div class="text-[13px] text-slate-600 indent-8">
             Скрипт для вывода актуальных дат на лендинг. Обратите внимание, скрипт нужно устанавливать в начале
             документа между тегами <b>&lt;head&gt;&lt;/head&gt; </b>
         </div>
-        <div class="text-sm p-3 bg-slate-200/70 rounded-lg w-full relative group">
+        <div class="text-[13px] p-3 bg-slate-200/70 rounded-lg w-full relative group">
             <code>{{ example_script }}</code>
             <div
                 class="absolute right-0 inset-y-0 flex items-center group-hover:opacity-100 transition-opacity opacity-0"
@@ -52,12 +52,12 @@ function copy() {
                 >
             </div>
         </div>
-        <div class="text-sm text-slate-600 indent-8">
+        <div class="text-[13px] text-slate-600 indent-8">
             Функция <b>dtime_nums</b> в качестве параметров принимает количество дней которые требуется отнять или
             прибавить к текущей дате (0 - сегодня, 1 - завтра, -2 - позовчера и т.д.). Что бы вывести дату, встаьте код
             в нужное место как на примере ниже.
         </div>
-        <div class="text-sm p-3 bg-slate-200/70 rounded-lg w-full relative group">
+        <div class="text-[13px] p-3 bg-slate-200/70 rounded-lg w-full relative group">
             <code>{{ example_date }}</code>
             <div
                 class="absolute right-0 inset-y-0 flex items-center group-hover:opacity-100 transition-opacity opacity-0"

@@ -13,7 +13,6 @@ const text = ref(props.defaultText);
 
 watch(() => props.status, handle);
 function handle() {
-    console.log(props.status);
     switch (props.status) {
         case "processing":
             color.value = "gray";
