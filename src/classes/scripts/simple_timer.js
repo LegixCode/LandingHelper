@@ -1,18 +1,39 @@
-export const simple_timer = `function start_timer(start_min, start_sec = 0) {
-    let min = start_min,
-      sec = start_sec,
-      intr = setInterval(() => {
-        sec -= 1;
-        if (sec < 0) {
-          min -= 1;
-          if (min < 0) {
-            clearInterval(intr);
-            return;
-          }
-          sec = 59;
-        }
-        document.getElementById("simple_timer").innerText = min.toString().padStart(2, 0) + ":" + sec.toString().padStart(2, 0);
-      }, 1000);
+export const simple_timer = `function set_cookie(name, value, days) {
+  const date = new Date();
+  date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+  document.cookie = name + "=" + value + ";expires=" + date.toUTCString() + ";path=/";
+}
+function get_cookie(name) {
+  const value = '; ' + document.cookie;
+  const parts = value.split('; ' + name +'=');
+  if (parts.length === 2) return parts.pop().split(";").shift();
+}
+function write_timer(elements, time) {
+  const value =
+    Math.floor(time / 60)
+      .toString()
+      .padStart(2, "0") +
+    ":" +
+    (time % 60).toString().padStart(2, "0");
+  for (let element of elements) element.innerHTML = value;
+}
+function start_timer(className, minutes) {
+  let time = minutes * 60;
+  if (get_cookie("time")) {
+    time = parseInt(get_cookie("time"), 10);
+  } else {
+    set_cookie("time", time, 1);
   }
-  start_timer(10);
+  let elements = document.getElementsByClassName(className);
+  write_timer(elements, time);
+  const timerInterval = setInterval(() => {
+    write_timer(elements, time);
+    set_cookie("time", --time, 1);
+    if (time < 0) {
+      clearInterval(timerInterval);
+      set_cookie("time", "", -1);
+    }
+  }, 1000);
+}
+start_timer("simple_timer", 2);
 `;
