@@ -99,6 +99,7 @@ onMounted(() => {
                     <option value="kma">KMA</option>
                     <option value="leadreaktor">LeadReaktor</option>
                     <option value="leadrock">LeadRock</option>
+                    <option value="leadtrade">LeadTrade</option>
                     <option value="lemonad">Lemonad</option>
                     <option value="shakes">Shakes</option>
                     <option value="trafficlight">TrafficLight</option>

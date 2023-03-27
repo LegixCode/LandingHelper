@@ -6,6 +6,7 @@ import { trafficlight } from "./pp/trafficlight";
 import { kma } from "./pp/kma";
 import { shakes } from "./pp/shakes";
 import { drcash } from "./pp/drcash";
+import { leadtrade } from "./pp/leadtrade";
 
 export function getPPProps(name) {
     return getPPField(name, "props");
@@ -31,6 +32,8 @@ function getPPField(pp_name, field) {
             return lemonad[field];
         case "leadreaktor":
             return leadreaktor[field];
+        case "leadtrade":
+            return leadtrade[field];
         case "trafficlight":
             return trafficlight[field];
         case "kma":
