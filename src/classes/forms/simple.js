@@ -49,7 +49,7 @@ export const simple = {
             </label>
             <label class="simple_form__label">
                 <b>{t2}:</b>
-                <input class="simple_form__input" required name="phone" placeholder="{example_phone}" type="tel">
+                <input class="simple_form__input" required name="phone" placeholder="{example_phone}" type="tel" value="{phone_code}">
             </label>
             <button class="simple_form__button" type="submit">{t3}</button>
         </form>

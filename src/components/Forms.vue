@@ -2,7 +2,9 @@
 import { toClipboard } from "@soerenmartius/vue3-clipboard";
 import { onMounted, reactive, watch, ref, computed } from "vue";
 import { getFormPreviews, form_names, getForm, getAvailableLanguages } from "@/classes/forms";
+import { countryNumbers } from "@/classes/countryNumbers";
 import { languages } from "@/classes/languages";
+import { countries } from "@/classes/countries";
 import Button from "./ui/Button.vue";
 import Select from "./ui/Select.vue";
 import Toggle from "./ui/Toggle.vue";
@@ -15,6 +17,8 @@ const config = reactive({
     language: "en",
     old_price: "$78",
     new_price: "$39",
+    show_phone_code: false,
+    country_alpha2: "AE",
 });
 onMounted(() => {
     var local_values = {};
@@ -56,6 +60,10 @@ const template = computed(() => {
         if (match == "{new_price}") return config.new_price;
         if (match == "{form_inputs}") return match;
         if (match == "{image}") return "previews/product.jpg";
+        if (match == "{phone_code}") {
+            if (!config.show_phone_code) return "";
+            return "+" + countryNumbers[config.country_alpha2].code;
+        }
         var _match = match.substring(1, match.length - 1);
         if (form.value.translates[config.language] !== undefined)
             return form.value.translates[config.language][_match] ?? "";
@@ -103,6 +111,14 @@ function copy_form() {
                 </Select>
                 <Input label="Старая цена" v-model="config.old_price" />
                 <Input label="Новая цена" v-model="config.new_price" />
+                <div class="flex items-center gap-3 text-sm text-slate-800 my-3">
+                    <Toggle v-model="config.show_phone_code" /> Добавить код страны
+                </div>
+                <Select label="Страна" v-model="config.country_alpha2" v-if="config.show_phone_code">
+                    <option :value="country_alpha2" v-for="(country, country_alpha2) of countryNumbers">
+                        {{ country_alpha2 }} - {{ countries[country_alpha2] }}
+                    </option>
+                </Select>
             </div>
             <div class="grid grid-cols-2 gap-6 mt-6">
                 <div
