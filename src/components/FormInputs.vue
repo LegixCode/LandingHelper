@@ -48,7 +48,7 @@ function copy_form_params() {
             </code>
         </div>
         <div class="order-first lg:order-none grid grid-cols-2 gap-x-6">
-            <Input v-for="s of getListSubs()" :label="s" v-model="subs[s]" />
+            <Input v-for="s of getListSubs()" :label="s" v-model.trim="subs[s]" />
         </div>
     </div>
 </template>
