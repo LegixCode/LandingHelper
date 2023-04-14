@@ -3,16 +3,23 @@ import Button from "@/components/ui/Button.vue";
 import saveFile from "@/classes/saveFile.js";
 import { toClipboard } from "@soerenmartius/vue3-clipboard";
 import StatusButton from "@/components/ui/StatusButton.vue";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 
-var example = "<" + 'script src="js/scroll_to_form.js" form_id="helper_form">' + "<" + "/script>";
+var minify_example = ref(false);
+var example = computed(() => {
+    var min = minify_example.value ? ".min" : "";
+    return "<" + 'script src="js/scroll_to_form' + min + '.js" form_id="helper_form">' + "<" + "/script>";
+});
+
 function save() {
+    minify_example.value = false;
     import("@/classes/scripts/scroll_to_form.js").then((obj) => {
         saveFile("scroll_to_form.js", obj.scroll_to_form);
     });
 }
 var minify_status = ref(null);
 function save_minify() {
+    minify_example.value = true;
     minify_status.value = "processing";
     import("@/classes/scripts/scroll_to_form.js")
         .then((obj) => {
@@ -54,6 +61,9 @@ function save_minify() {
                     Скопировать
                 </Button>
             </div>
+        </div>
+        <div class="text-[13px] text-slate-600">
+            Добавьте класс <b>ignore-scroll</b> к ссылке, что бы скрипт к ней не применился
         </div>
     </div>
 </template>
