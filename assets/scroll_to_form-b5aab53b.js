@@ -20,6 +20,8 @@ const t=`function DoScrolling(element, duration) {
 function EnableScroll(element) {
     var a_tags = document.getElementsByTagName('a');
     for (let a of a_tags) {
+        if (a.classList.contains('ignore-scroll'))
+            continue;
         a.removeAttribute('target');
         a.removeAttribute('onclick');
         a.href = "";

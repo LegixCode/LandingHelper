@@ -35,5 +35,5 @@ function start_timer(className, minutes) {
     }
   }, 1000);
 }
-start_timer("simple_timer", 2);
+start_timer("simple_timer", 25);
 `;export{e as simple_timer};
