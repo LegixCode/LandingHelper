@@ -7,6 +7,7 @@ import { kma } from "./pp/kma";
 import { shakes } from "./pp/shakes";
 import { drcash } from "./pp/drcash";
 import { leadtrade } from "./pp/leadtrade";
+import { everad } from "./pp/everad";
 
 export function getPPProps(name) {
     return getPPField(name, "props");
@@ -26,6 +27,8 @@ function getPPField(pp_name, field) {
             return adcombo[field];
         case "drcash":
             return drcash[field];
+        case "everad":
+            return everad[field];
         case "leadrock":
             return leadrock[field];
         case "lemonad":

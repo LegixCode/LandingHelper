@@ -96,6 +96,7 @@ onMounted(() => {
                 <Select label="ПП" v-model="pp">
                     <option value="adcombo">AdCombo</option>
                     <option value="drcash">Dr.Cash</option>
+                    <option value="everad">Everad</option>
                     <option value="kma">KMA</option>
                     <option value="leadreaktor">LeadReaktor</option>
                     <option value="leadrock">LeadRock</option>
