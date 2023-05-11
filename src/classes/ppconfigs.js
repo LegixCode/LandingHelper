@@ -8,6 +8,7 @@ import { shakes } from "./pp/shakes";
 import { drcash } from "./pp/drcash";
 import { leadtrade } from "./pp/leadtrade";
 import { everad } from "./pp/everad";
+import { skylead } from "./pp/skylead";
 
 export function getPPProps(name) {
     return getPPField(name, "props");
@@ -43,5 +44,7 @@ function getPPField(pp_name, field) {
             return kma[field];
         case "shakes":
             return shakes[field];
+        case "skylead":
+            return skylead[field];
     }
 }

@@ -103,6 +103,7 @@ onMounted(() => {
                     <option value="leadtrade">LeadTrade</option>
                     <option value="lemonad">Lemonad</option>
                     <option value="shakes">Shakes</option>
+                    <option value="skylead">SkyLead</option>
                     <option value="trafficlight">TrafficLight</option>
                 </Select>
                 <PPParams :pp="pp" v-model:prop_values="prop_values" />
