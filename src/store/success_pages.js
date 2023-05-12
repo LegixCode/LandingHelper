@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 import { computed, watch } from "vue";
-import all_languages from "@/classes/languages";
 import createStoreObject from "@/classes/storage_object";
 import { first } from "@/classes/successPages/first";
 import { adcombo } from "@/classes/successPages/adcombo";
@@ -22,9 +21,7 @@ export const useSuccessPagesStore = defineStore("success_pages", () => {
         }
     );
 
-    const languages = [...new Set(success_pages.flatMap((s) => Object.keys(s.translates)))].sort((a, b) =>
-        all_languages[a] > all_languages[b] ? 1 : -1
-    );
+    const languages = [...new Set(success_pages.flatMap((s) => Object.keys(s.translates)))];
 
     const available_pages = computed(() => {
         return success_pages.filter((p) => Object.keys(p.translates).indexOf(config.value.language) !== -1);

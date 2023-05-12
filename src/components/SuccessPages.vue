@@ -2,9 +2,9 @@
 import saveFile from "@/classes/saveFile.js";
 import languages from "@/classes/languages";
 import Button from "./ui/Button.vue";
-import Select from "./ui/Select.vue";
 import Toggle from "./ui/Toggle.vue";
 import { useSuccessPagesStore } from "@/store/success_pages";
+import SearchSelect from "./ui/SearchSelect.vue";
 
 const store = useSuccessPagesStore();
 
@@ -29,11 +29,17 @@ function loadPage() {
         </div>
         <div class="order-first lg:order-none">
             <div class="flex flex-col">
-                <Select label="Язык" v-model="store.config.language">
-                    <option :value="lang" v-for="lang of store.languages">
-                        {{ languages[lang] }}
-                    </option>
-                </Select>
+                <SearchSelect
+                    label="Язык"
+                    v-model="store.config.language"
+                    :options="
+                        store.languages.map((lang) => ({
+                            value: lang,
+                            label: languages[lang],
+                        }))
+                    "
+                    :search-by="(item) => item.label + ' ' + item.value"
+                />
                 <div class="flex items-center gap-3 text-sm text-slate-800">
                     <Toggle v-model="store.config.fb_pixel" /> Добавить FB pixel
                 </div>

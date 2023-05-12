@@ -1,7 +1,6 @@
 import { defineStore } from "pinia";
 import { computed, watch } from "vue";
 import createStoreObject from "@/classes/storage_object";
-import all_languages from "@/classes/languages";
 import { simple } from "@/classes/forms/simple";
 
 export const useFormsStore = defineStore("forms", () => {
@@ -24,9 +23,7 @@ export const useFormsStore = defineStore("forms", () => {
         }
     );
 
-    const languages = [...new Set(forms.flatMap((s) => Object.keys(s.translates)))].sort((a, b) =>
-        all_languages[a] > all_languages[b] ? 1 : -1
-    );
+    const languages = [...new Set(forms.flatMap((s) => Object.keys(s.translates)))];
 
     const current_form = computed(() => forms.find((f) => f.name == config.value.name));
 

@@ -6,9 +6,9 @@ import countries from "@/classes/countries";
 import { useFormSubsStore } from "@/store/form_subs";
 import { useFormsStore } from "@/store/forms";
 import Button from "./ui/Button.vue";
-import Select from "./ui/Select.vue";
 import Toggle from "./ui/Toggle.vue";
 import Input from "./ui/Input.vue";
+import SearchSelect from "./ui/SearchSelect.vue";
 
 const store = useFormsStore();
 
@@ -55,19 +55,34 @@ function copy_form() {
         </div>
         <div class="order-first lg:order-none">
             <div class="flex flex-col">
-                <Select label="Язык" v-model="store.config.language">
-                    <option :value="lang" v-for="lang of store.languages">{{ languages[lang] }}</option>
-                </Select>
+                <SearchSelect
+                    label="Язык"
+                    v-model="store.config.language"
+                    :options="
+                        store.languages.map((lang) => ({
+                            value: lang,
+                            label: languages[lang],
+                        }))
+                    "
+                    :search-by="(item) => item.label + ' ' + item.value"
+                />
                 <Input label="Старая цена" v-model="store.config.old_price" />
                 <Input label="Новая цена" v-model="store.config.new_price" />
                 <div class="flex items-center gap-3 text-sm text-slate-800 my-3">
                     <Toggle v-model="store.config.show_phone_code" /> Добавить код страны
                 </div>
-                <Select label="Страна" v-model="store.config.country_alpha2" v-if="store.config.show_phone_code">
-                    <option :value="country_alpha2" v-for="(country, country_alpha2) of countryNumbers">
-                        {{ country_alpha2 }} - {{ countries[country_alpha2] }}
-                    </option>
-                </Select>
+                <SearchSelect
+                    label="Страна"
+                    v-model="store.config.country_alpha2"
+                    v-if="store.config.show_phone_code"
+                    :options="
+                        Object.keys(countryNumbers).map((alpha2) => ({
+                            value: alpha2,
+                            label: countries[alpha2],
+                        }))
+                    "
+                    :search-by="(item) => item.label + ' ' + item.value"
+                />
             </div>
             <div class="grid grid-cols-2 gap-6 mt-6">
                 <div
