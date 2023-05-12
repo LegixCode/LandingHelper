@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 
 const emit = defineEmits(["update:modelValue"]);
 const props = defineProps({
@@ -34,6 +34,13 @@ const input = ref();
 const focused = ref(false);
 const mouseover = ref(false);
 const showed = computed(() => focused.value || mouseover.value);
+const delay_showed = ref(false);
+watch(
+    () => showed.value,
+    () => {
+        setTimeout(() => (delay_showed.value = showed.value), 1);
+    }
+);
 
 const search_value = ref("");
 
@@ -52,11 +59,6 @@ const options = computed(() => {
     return sorted_options.value.filter((option) => searchBy(option).toLowerCase().indexOf(_search_value) !== -1);
 });
 
-function focus(status) {
-    focused.value = status;
-    if (status) search_value.value = "";
-}
-
 function select(option) {
     input.value.blur();
     mouseover.value = false;
@@ -72,14 +74,15 @@ function select_first() {
     <div class="my-2">
         <div
             class="relative border rounded-lg h-11 border-slate-400/[0.32] focus-within:border-slate-400/[0.32] flex items-center pr-2"
+            :class="{ 'rounded-b-none': showed }"
         >
             <input
                 type="text"
                 class="py-[13px] px-4 text-sm leading-none appearance-none focus:outline-none bg-transparent w-full"
-                :value="focused || mouseover ? search_value : selected_value_label"
+                :value="showed ? search_value : selected_value_label"
                 @input="search_value = $event.target.value"
-                @focusout="focus(false)"
-                @focusin="focus(true)"
+                @focusin="(focused = true) && (search_value = '')"
+                @focusout="focused = false"
                 v-on:keyup.enter="select_first"
                 ref="input"
             />
@@ -88,7 +91,7 @@ function select_first() {
                 width="18"
                 height="18"
                 viewBox="0 0 256 256"
-                class="text-slate-600 transition-transform"
+                class="text-slate-600 transition-transform duration-200"
                 :class="{ 'rotate-180': showed }"
             >
                 <path
@@ -102,8 +105,9 @@ function select_first() {
                 {{ label }}
             </label>
             <div
-                class="absolute top-9 -inset-x-px bg-white border border-slate-400/[0.32] max-h-60 overflow-y-scroll rounded-b-lg z-10 shadow-card"
-                v-if="focused || mouseover"
+                class="absolute top-10 -inset-x-px bg-white border border-slate-400/[0.32] max-h-60 overflow-y-scroll rounded-b-lg z-10 transition-all duration-200"
+                :class="[delay_showed && showed ? 'max-h-60 shadow-card' : 'max-h-0 shadow-card/0']"
+                v-if="showed || (delay_showed && !showed)"
                 @mouseenter="mouseover = true"
                 @mouseleave="mouseover = false"
             >
