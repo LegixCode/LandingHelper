@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from "vue";
 import { getListSubs } from "@/classes/listSubs";
-import Button from "@/Components/ui/Button.vue";
-import Select from "@/Components/ui/Select.vue";
+import Button from "@/components/ui/Button.vue";
+import Select from "@/components/ui/Select.vue";
 import { usePartnersStore } from "@/store/partners";
 
 const showed = ref(false);
