@@ -1,7 +1,6 @@
 <script setup>
 import Button from "@/components/ui/Button.vue";
 import saveFile from "@/classes/saveFile.js";
-import { toClipboard } from "@soerenmartius/vue3-clipboard";
 import StatusButton from "@/components/ui/StatusButton.vue";
 import { ref, computed } from "vue";
 
@@ -57,7 +56,7 @@ function save_minify() {
             <div
                 class="absolute right-0 inset-y-0 flex items-center group-hover:opacity-100 transition-opacity opacity-0"
             >
-                <Button color="purple" @click="toClipboard(example)" class="bg-slate-200/90 rounded-xl">
+                <Button color="purple" v-clipboard="example" class="bg-slate-200/90 rounded-xl">
                     Скопировать
                 </Button>
             </div>

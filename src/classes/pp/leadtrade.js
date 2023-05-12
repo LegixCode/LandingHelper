@@ -1,4 +1,4 @@
-export const leadtrade = {
+export default {
     props: {
         hash: "Хеш",
         country: "Страна",

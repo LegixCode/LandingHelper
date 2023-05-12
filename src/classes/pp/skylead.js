@@ -1,4 +1,4 @@
-export const skylead = {
+export default {
     props: {
         api_key: "Ключ API",
         flow: "ID потока",
@@ -10,7 +10,7 @@ export const skylead = {
         utm_content: "sub_id_3",
         utm_term: "sub_id_4",
         utm_medium: "sub_id_5",
-        subid: "click_id"
+        subid: "click_id",
     },
     template: `
     $request_params = array(

@@ -1,4 +1,4 @@
-export const leadrock = {
+export default {
     props: {
         key: "ID пользователя",
         secret: "Токен",

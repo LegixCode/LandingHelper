@@ -1,4 +1,4 @@
-export const drcash = {
+export default {
     props: {
         api_key: "Ключ API",
         stream_code: "ID потока",

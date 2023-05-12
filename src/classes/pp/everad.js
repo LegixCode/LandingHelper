@@ -1,4 +1,4 @@
-export const everad = {
+export default {
     props: {
         campaign_id: "ID потока",
     },

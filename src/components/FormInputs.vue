@@ -1,39 +1,13 @@
 <script setup>
-import { toClipboard } from "@soerenmartius/vue3-clipboard";
-import { onMounted, reactive, watch } from "vue";
-import { getListSubs } from "@/classes/listSubs";
 import Button from "./ui/Button.vue";
 import Input from "./ui/Input.vue";
+import { storeToRefs } from "pinia";
+import { useFormSubsStore } from "@/store/form_subs";
 
-const subs = reactive({});
-getListSubs().forEach((s) => (subs[s] = ""));
-watch(
-    () => subs,
-    () => {
-        localStorage.setItem("subs", JSON.stringify(subs));
-    },
-    {
-        deep: true,
-    }
-);
-onMounted(() => {
-    var local_values = {};
-    if (localStorage.getItem("subs"))
-        try {
-            local_values = JSON.parse(localStorage.getItem("subs"));
-        } catch {}
-    Object.keys(subs).forEach((key) => {
-        subs[key] = local_values[key] ?? "";
-    });
-});
+const { subs } = storeToRefs(useFormSubsStore());
 
 function copy_form_params() {
-    toClipboard(
-        Object.keys(subs)
-            .filter((sub) => subs[sub].length > 0)
-            .map((sub) => `<input type="hidden" name="${sub}" value="${subs[sub]}" />`)
-            .join("\n")
-    );
+    toClipboard(useFormSubsStore().getInputs());
 }
 </script>
 <template>
@@ -44,11 +18,11 @@ function copy_form_params() {
                 <Button color="purple" @click="copy_form_params" class="ml-auto">Скопировать</Button>
             </div>
             <code class="text-xs">
-                <p v-for="s of getListSubs()">&ltinput type="hidden" name="{{ s }}" value="{{ subs[s] }}" /&gt</p>
+                <p v-for="(value, name) of subs">&ltinput type="hidden" name="{{ name }}" value="{{ value }}" /&gt</p>
             </code>
         </div>
         <div class="order-first lg:order-none grid grid-cols-2 gap-x-6">
-            <Input v-for="s of getListSubs()" :label="s" v-model.trim="subs[s]" />
+            <Input v-for="(value, name) of subs" :label="name" v-model.trim="subs[name]" />
         </div>
     </div>
 </template>

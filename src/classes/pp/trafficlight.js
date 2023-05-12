@@ -1,4 +1,4 @@
-export const trafficlight = {
+export default {
     props: {
         apiKey: "Ключ API",
         offer_id: "ID оффера",

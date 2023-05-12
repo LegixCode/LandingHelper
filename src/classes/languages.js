@@ -1,4 +1,4 @@
-export const languages = {
+export default {
     ab: "Абхазский",
     av: "Аварский",
     ae: "Авестийский",

@@ -1,4 +1,4 @@
-export const leadreaktor = {
+export default {
     props: {
         api_key: "Ключ API",
         offer_id: "ID оффера",

@@ -1,13 +1,12 @@
 <script setup>
 import Button from "@/components/ui/Button.vue";
-import { toClipboard } from "@soerenmartius/vue3-clipboard";
 
 var example_date = "<" + "script>dtime_nums(-1)" + "<" + "/script>";
 
 function copy() {
-    import("@/classes/scripts/dtime_nums.js").then((obj) => {
-        toClipboard("<" + "script>\n" + obj.dtime_nums + "\n<" + "/script>");
-    });
+    toClipboard(
+        import("@/classes/scripts/dtime_nums.js").then((obj) => "<" + "script>\n" + obj.dtime_nums + "\n<" + "/script>")
+    );
 }
 </script>
 <template>
@@ -30,9 +29,7 @@ function copy() {
             <div
                 class="absolute right-0 inset-y-0 flex items-center group-hover:opacity-100 transition-opacity opacity-0"
             >
-                <Button color="purple" @click="toClipboard(example_date)" class="bg-slate-200/90 rounded-xl">
-                    Скопировать
-                </Button>
+                <Button color="purple" v-clipboard="example_date" class="bg-slate-200/90 rounded-xl"> Скопировать </Button>
             </div>
         </div>
     </div>

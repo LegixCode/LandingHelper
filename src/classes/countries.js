@@ -1,4 +1,4 @@
-export const countries = {
+export default {
     AU: "Австралия",
     AT: "Австрия",
     AZ: "Азербайджан",

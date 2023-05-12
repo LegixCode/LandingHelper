@@ -1,4 +1,4 @@
-export const kma = {
+export default {
     props: {
         api_key: "Ключ API",
         stream_id: "ID потока",

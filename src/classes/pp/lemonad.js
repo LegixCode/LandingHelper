@@ -1,4 +1,4 @@
-export const lemonad = {
+export default {
     props: {
         webmaster_token: "Ключ API",
         offer_id: "ID оффера",

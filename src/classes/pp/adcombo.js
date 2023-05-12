@@ -1,4 +1,4 @@
-export const adcombo = {
+export default {
     props: {
         api_key: "Ключ API",
         offer_id: "ID оффера",
@@ -15,7 +15,7 @@ export const adcombo = {
         utm_medium: "",
         utm_source: "",
         utm_term: "",
-        clickid: "click_id"
+        clickid: "click_id",
     },
     template: `
     $request_params = [

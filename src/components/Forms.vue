@@ -1,97 +1,46 @@
 <script setup>
-import { toClipboard } from "@soerenmartius/vue3-clipboard";
-import { onMounted, reactive, watch, ref, computed } from "vue";
-import { getFormPreviews, form_names, getForm, getAvailableLanguages } from "@/classes/forms";
+import { computed } from "vue";
 import { countryNumbers } from "@/classes/countryNumbers";
-import { languages } from "@/classes/languages";
-import { countries } from "@/classes/countries";
+import languages from "@/classes/languages";
+import countries from "@/classes/countries";
+import { useFormSubsStore } from "@/store/form_subs";
+import { useFormsStore } from "@/store/forms";
 import Button from "./ui/Button.vue";
 import Select from "./ui/Select.vue";
 import Toggle from "./ui/Toggle.vue";
 import Input from "./ui/Input.vue";
 
-const available_languages = getAvailableLanguages().sort((a, b) => (languages[a] > languages[b] ? 1 : -1));
-
-const config = reactive({
-    name: form_names[0],
-    language: "en",
-    old_price: "$78",
-    new_price: "$39",
-    show_phone_code: false,
-    country_alpha2: "AE",
-});
-onMounted(() => {
-    var local_values = {};
-    if (localStorage.getItem("form_config"))
-        try {
-            local_values = JSON.parse(localStorage.getItem("form_config"));
-            Object.keys(config).forEach((key) => {
-                if (local_values[key] !== undefined) config[key] = local_values[key] ?? "";
-            });
-        } catch {}
-});
-watch(
-    () => config,
-    () => {
-        localStorage.setItem("form_config", JSON.stringify(config));
-    },
-    {
-        deep: true,
-    }
-);
-
-const form = computed(() => {
-    return getForm(config.name);
-});
-
-const previews = computed(() => {
-    return getFormPreviews(config.language);
-});
-watch(
-    () => previews.value,
-    () => {
-        if (Object.keys(previews.value).indexOf(config.name) === -1) config.name = Object.keys(previews.value)[0];
-    }
-);
+const store = useFormsStore();
 
 const template = computed(() => {
-    return form.value.template.replaceAll(/{(\w)+}/g, (match) => {
-        if (match == "{old_price}") return config.old_price;
-        if (match == "{new_price}") return config.new_price;
+    return store.current_form.template.replaceAll(/{(\w)+}/g, (match) => {
+        if (match == "{old_price}") return store.config.old_price;
+        if (match == "{new_price}") return store.config.new_price;
         if (match == "{form_inputs}") return match;
         if (match == "{image}") return "previews/product.jpg";
         if (match == "{phone_code}") {
-            if (!config.show_phone_code) return "";
-            return "+" + countryNumbers[config.country_alpha2].code;
+            if (!store.config.show_phone_code) return "";
+            return "+" + countryNumbers[store.config.country_alpha2].code;
         }
         var _match = match.substring(1, match.length - 1);
-        if (form.value.translates[config.language] !== undefined)
-            return form.value.translates[config.language][_match] ?? "";
+        if (store.current_form.translates[store.config.language] !== undefined)
+            return store.current_form.translates[store.config.language][_match] ?? "";
         return match;
     });
 });
 
 const iframe_code = computed(() => {
     return `
-            <style>${form.value.style}</style>
+            <style>${store.current_form.style}</style>
             ${template.value}
     `;
 });
 
 function copy_style() {
-    toClipboard(`<style>${form.value.style}</style>`);
+    toClipboard(`<style>${store.current_form.style}</style>`);
 }
 function copy_form() {
-    var subs = "";
-    if (localStorage.getItem("subs"))
-        try {
-            var local_values = JSON.parse(localStorage.getItem("subs"));
-            subs = Object.keys(local_values)
-                .filter((sub) => local_values[sub].length > 0)
-                .map((sub) => `<input type="hidden" name="${sub}" value="${local_values[sub]}" />`)
-                .join("\n");
-        } catch {}
-    toClipboard(template.value.replace("{form_inputs}", subs));
+    toClipboard(template.value.replace("{form_inputs}", useFormSubsStore().getInputs()));
 }
 </script>
 <template>
@@ -106,15 +55,15 @@ function copy_form() {
         </div>
         <div class="order-first lg:order-none">
             <div class="flex flex-col">
-                <Select label="Язык" v-model="config.language">
-                    <option :value="lang" v-for="lang of available_languages">{{ languages[lang] }}</option>
+                <Select label="Язык" v-model="store.config.language">
+                    <option :value="lang" v-for="lang of store.languages">{{ languages[lang] }}</option>
                 </Select>
-                <Input label="Старая цена" v-model="config.old_price" />
-                <Input label="Новая цена" v-model="config.new_price" />
+                <Input label="Старая цена" v-model="store.config.old_price" />
+                <Input label="Новая цена" v-model="store.config.new_price" />
                 <div class="flex items-center gap-3 text-sm text-slate-800 my-3">
-                    <Toggle v-model="config.show_phone_code" /> Добавить код страны
+                    <Toggle v-model="store.config.show_phone_code" /> Добавить код страны
                 </div>
-                <Select label="Страна" v-model="config.country_alpha2" v-if="config.show_phone_code">
+                <Select label="Страна" v-model="store.config.country_alpha2" v-if="store.config.show_phone_code">
                     <option :value="country_alpha2" v-for="(country, country_alpha2) of countryNumbers">
                         {{ country_alpha2 }} - {{ countries[country_alpha2] }}
                     </option>
@@ -123,11 +72,11 @@ function copy_form() {
             <div class="grid grid-cols-2 gap-6 mt-6">
                 <div
                     class="shadow-card border-2 rounded-lg overflow-hidden cursor-pointer transition-transform hover:scale-110"
-                    v-for="(preview, name) of previews"
-                    :class="[name == config.name ? 'border-teal-500' : 'border-white']"
-                    @click="config.name = name"
+                    v-for="form of store.available_forms"
+                    :class="[form.name == store.config.name ? 'border-teal-500' : 'border-white']"
+                    @click="store.config.name = form.name"
                 >
-                    <img :src="preview" class="w-full" />
+                    <img :src="form.preview" class="w-full" />
                 </div>
             </div>
         </div>
