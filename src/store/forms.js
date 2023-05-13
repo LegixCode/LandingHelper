@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { computed, watch } from "vue";
 import createStoreObject from "@/classes/storage_object";
 import { simple } from "@/classes/forms/simple";
+import basic_phrases from "@/classes/forms/basic_phrases";
 
 export const useFormsStore = defineStore("forms", () => {
     const forms = [simple];
@@ -23,12 +24,18 @@ export const useFormsStore = defineStore("forms", () => {
         }
     );
 
-    const languages = [...new Set(forms.flatMap((s) => Object.keys(s.translates)))];
+    const languages = (() => {
+        let languages = [];
+        forms.forEach((form) => {
+            languages.push(Object.keys(form.translates ?? basic_phrases));
+        });
+        return [...new Set(...languages)];
+    })();
 
     const current_form = computed(() => forms.find((f) => f.name == config.value.name));
 
     const available_forms = computed(() =>
-        forms.filter((form) => Object.keys(form.translates).indexOf(config.value.language) !== -1)
+        forms.filter((form) => Object.keys(form.translates ?? basic_phrases).indexOf(config.value.language) !== -1)
     );
 
     return { config, current_form, available_forms, languages };

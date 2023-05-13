@@ -3,12 +3,13 @@ import { computed } from "vue";
 import { countryNumbers } from "@/classes/countryNumbers";
 import languages from "@/classes/languages";
 import countries from "@/classes/countries";
+import basic_phrases from "@/classes/forms/basic_phrases";
 import { useFormSubsStore } from "@/store/form_subs";
 import { useFormsStore } from "@/store/forms";
-import Button from "./ui/Button.vue";
-import Toggle from "./ui/Toggle.vue";
-import Input from "./ui/Input.vue";
-import SearchSelect from "./ui/SearchSelect.vue";
+import Button from "@/components/ui/Button.vue";
+import Toggle from "@/components/ui/Toggle.vue";
+import Input from "@/components/ui/Input.vue";
+import SearchSelect from "@/components/ui/SearchSelect.vue";
 
 const store = useFormsStore();
 
@@ -23,8 +24,10 @@ const template = computed(() => {
             return "+" + countryNumbers[store.config.country_alpha2].code;
         }
         var _match = match.substring(1, match.length - 1);
-        if (store.current_form.translates[store.config.language] !== undefined)
+        if (store.current_form.translates && store.current_form.translates[store.config.language] !== undefined)
             return store.current_form.translates[store.config.language][_match] ?? "";
+        if (basic_phrases[store.config.language] !== undefined)
+            return basic_phrases[store.config.language][_match] ?? "";
         return match;
     });
 });
