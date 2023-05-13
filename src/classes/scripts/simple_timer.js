@@ -9,13 +9,18 @@ function get_cookie(name) {
   if (parts.length === 2) return parts.pop().split(";").shift();
 }
 function write_timer(elements, time) {
-  const value =
-    Math.floor(time / 60)
-      .toString()
-      .padStart(2, "0") +
-    ":" +
-    (time % 60).toString().padStart(2, "0");
-  for (let element of elements) element.innerHTML = value;
+  var seconds = (time % 60).toString().padStart(2, "0");
+  var minutes = Math.floor(time / 60 % 60).toString().padStart(2, "0");
+  var hours = Math.floor(time / 60 / 60).toString().padStart(2, "0");
+  for (let element of elements) {
+      if (element.getElementsByClassName('seconds').length && element.getElementsByClassName('minutes').length) {
+          element.getElementsByClassName('seconds')[0].innerHTML = seconds;
+          element.getElementsByClassName('minutes')[0].innerHTML = minutes;
+          if (element.getElementsByClassName('hours').length)
+              element.getElementsByClassName('hours')[0].innerHTML = hours;
+      }
+      else element.innerHTML = (hours == '00' ? '' : (hours + ':')) + minutes + ':' + seconds;
+  }
 }
 function start_timer(className, minutes) {
   let time = minutes * 60;

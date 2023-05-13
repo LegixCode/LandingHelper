@@ -15,8 +15,8 @@ const store = useFormsStore();
 
 const template = computed(() => {
     return store.current_form.template.replaceAll(/{(\w)+}/g, (match) => {
-        if (match == "{old_price}") return store.config.old_price;
-        if (match == "{new_price}") return store.config.new_price;
+        if (match == "{old_price_value}") return store.config.old_price;
+        if (match == "{new_price_value}") return store.config.new_price;
         if (match == "{form_inputs}") return match;
         if (match == "{image}") return "previews/product.jpg";
         if (match == "{phone_code}") {
@@ -53,6 +53,10 @@ function copy_form() {
                 <div class="font-bold">Форма</div>
                 <Button color="purple" @click="copy_style" class="ml-auto">Скопировать стили</Button>
                 <Button color="purple" @click="copy_form">Скопировать форму</Button>
+            </div>
+            <div v-if="store.current_form.scripts" class="text-[13px] text-slate-600 text-center -mt-6 pb-6">
+                Выбранная форма требует обязательной установки следующих скриптов:
+                <b>{{ store.current_form.scripts.map((s) => s + ".js").join(",") }}</b>
             </div>
             <div v-html="iframe_code.replace('{form_inputs}', '')"></div>
         </div>

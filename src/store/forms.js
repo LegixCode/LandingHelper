@@ -2,10 +2,11 @@ import { defineStore } from "pinia";
 import { computed, watch } from "vue";
 import createStoreObject from "@/classes/storage_object";
 import { simple } from "@/classes/forms/simple";
+import { timer } from "@/classes/forms/timer";
 import basic_phrases from "@/classes/forms/basic_phrases";
 
 export const useFormsStore = defineStore("forms", () => {
-    const forms = [simple];
+    const forms = [simple, timer];
 
     const config = createStoreObject("form_config", {
         name: forms[0].name,
