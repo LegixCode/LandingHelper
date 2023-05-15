@@ -1,7 +1,7 @@
 <script setup>
 import Button from "@/components/ui/Button.vue";
 
-var example_date = "<" + "script>dtime_nums(-1)" + "<" + "/script>";
+var example_date = "<" + "script>dtime_nums(0)" + "<" + "/script>";
 
 function copy() {
     toClipboard(

@@ -12,30 +12,38 @@ var example = computed(() => {
 
 function save() {
     minify_example.value = false;
-    import("@/classes/scripts/scroll_to_form.js").then((obj) => {
-        saveFile("scroll_to_form.js", obj.scroll_to_form);
-    });
+
+    toClipboard(
+        import("@/classes/scripts/scroll_to_form.js")
+            .then((obj) => {
+                saveFile("scroll_to_form.js", obj.scroll_to_form);
+            })
+            .then(() => example.value)
+    );
 }
 var minify_status = ref(null);
 function save_minify() {
     minify_example.value = true;
     minify_status.value = "processing";
-    import("@/classes/scripts/scroll_to_form.js")
-        .then((obj) => {
-            import("terser")
-                .then((terser) => {
-                    terser
-                        .minify(obj.scroll_to_form)
-                        .then((result) => {
-                            saveFile("scroll_to_form.min.js", result.code);
-                            minify_status.value = "success";
-                            setTimeout(() => (minify_status.value = null), 2000);
-                        })
-                        .catch(() => (minify_status.value = "error"));
-                })
-                .catch(() => (minify_status.value = "error"));
-        })
-        .catch(() => (minify_status.value = "error"));
+    toClipboard(
+        import("@/classes/scripts/scroll_to_form.js")
+            .then((obj) => {
+                import("terser")
+                    .then((terser) => {
+                        terser
+                            .minify(obj.scroll_to_form)
+                            .then((result) => {
+                                saveFile("scroll_to_form.min.js", result.code);
+                                minify_status.value = "success";
+                                setTimeout(() => (minify_status.value = null), 2000);
+                            })
+                            .catch(() => (minify_status.value = "error"));
+                    })
+                    .catch(() => (minify_status.value = "error"));
+            })
+            .then(() => example.value)
+            .catch(() => (minify_status.value = "error"))
+    );
 }
 </script>
 <template>
@@ -56,9 +64,7 @@ function save_minify() {
             <div
                 class="absolute right-0 inset-y-0 flex items-center group-hover:opacity-100 transition-opacity opacity-0"
             >
-                <Button color="purple" v-clipboard="example" class="bg-slate-200/90 rounded-xl">
-                    Скопировать
-                </Button>
+                <Button color="purple" v-clipboard="example" class="bg-slate-200/90 rounded-xl"> Скопировать </Button>
             </div>
         </div>
         <div class="text-[13px] text-slate-600">
