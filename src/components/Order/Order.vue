@@ -18,7 +18,7 @@ const store = usePartnersStore();
                     <div class="font-bold">order.php</div>
                     <Button
                         color="purple"
-                        v-clipboard="store.formated_order_file"
+                        v-clipboard="() => store.formated_order_file"
                         class="ml-auto"
                         :disabled="!store.formated_order_file"
                         >Скопировать</Button

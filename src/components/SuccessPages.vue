@@ -17,7 +17,7 @@ function loadPage() {
         <div class="rounded-lg shadow-card border border-slate-100 p-6 col-span-2">
             <div class="flex gap-3 pb-6 items-center">
                 <div class="font-bold">success.php</div>
-                <Button color="purple" v-clipboard="store.getCompletedTemplate()" class="ml-auto">Скопировать</Button>
+                <Button color="purple" v-clipboard="store.getCompletedTemplate" class="ml-auto">Скопировать</Button>
                 <Button color="green" @click="loadPage">Скачать</Button>
             </div>
             <div>

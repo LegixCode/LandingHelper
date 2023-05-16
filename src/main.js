@@ -19,7 +19,7 @@ window.toClipboard = function (value) {
 const clipboardDirective = {
     mounted: (el, binding) =>
         el.addEventListener("click", () => {
-            toClipboard(binding.value);
+            toClipboard(typeof binding.value === "function" ? binding.value() : binding.value);
         }),
 };
 

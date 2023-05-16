@@ -64,11 +64,11 @@ function save_minify() {
             <div
                 class="absolute right-0 inset-y-0 flex items-center group-hover:opacity-100 transition-opacity opacity-0"
             >
-                <Button color="purple" v-clipboard="example" class="bg-slate-200/90 rounded-xl"> Скопировать </Button>
+                <Button color="purple" v-clipboard="() => example" class="bg-slate-200/90 rounded-xl"> Скопировать </Button>
             </div>
         </div>
         <div class="text-[13px] text-slate-600">
-            Добавьте класс <b>ignore-scroll</b> к ссылке, что бы скрипт к ней не применился
+            Добавьте класс <b>ignore-scroll</b> к ссылке, чтобы скрипт к ней не применился
         </div>
     </div>
 </template>
