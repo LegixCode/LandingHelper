@@ -15,6 +15,7 @@ export const usePartnersStore = defineStore("partners", () => {
         shakes: "Shakes",
         skylead: "SkyLead",
         trafficlight: "TrafficLight",
+        webvork: "WebVork",
     };
 
     const config = createStoreObject("partner", {
