@@ -22,13 +22,19 @@ function write_timer(elements, time) {
       else element.innerHTML = (hours == '00' ? '' : (hours + ':')) + minutes + ':' + seconds;
   }
 }
-function start_timer(className, minutes) {
-  let time = minutes * 60;
-  if (get_cookie("time")) {
-    time = parseInt(get_cookie("time"), 10);
-  } else {
-    set_cookie("time", time, 1);
-  }
+function start_timer(className, minutes = 0) {
+  let time;
+  if (minutes) {
+    time = minutes * 60;
+    if (get_cookie("time")) {
+      time = parseInt(get_cookie("time"), 10);
+    } else {
+      set_cookie("time", time, 1);
+    }
+  } else
+    time = Math.floor(
+      (new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 1) - new Date()) / 1000
+    );
   let elements = document.getElementsByClassName(className);
   write_timer(elements, time);
   const timerInterval = setInterval(() => {
