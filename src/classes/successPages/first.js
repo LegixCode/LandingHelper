@@ -13,7 +13,7 @@ export const first = {
             t3: "Un especialista se pondrá en contacto con usted y confirmará los datos del pedido.",
         },
         en: {
-            t1: "Thank tou!",
+            t1: "Thank you!",
             t2: "Your order has been accepted!",
             t3: "A specialist will contact you and confirm the order details.",
         },
