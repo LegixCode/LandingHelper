@@ -12,6 +12,7 @@ export const usePartnersStore = defineStore("partners", () => {
         leadrock: "LeadRock",
         leadtrade: "Leadtrade",
         lemonad: "LemonAD",
+        m1: "M1",
         shakes: "Shakes",
         skylead: "SkyLead",
         trafficlight: "TrafficLight",
