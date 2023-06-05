@@ -8,6 +8,7 @@ export const usePartnersStore = defineStore("partners", () => {
         drcash: "dr.cash",
         everad: "Everad",
         kma: "KMA",
+        leadbit: "Leadbit",
         leadreaktor: "Leadreaktor",
         leadrock: "LeadRock",
         leadtrade: "Leadtrade",
