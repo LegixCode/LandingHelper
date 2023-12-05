@@ -57,6 +57,11 @@ export const first = {
             t2: "Il tuo ordine è stato accettato!",
             t3: "Uno specialista ti contatterà e confermerà i dettagli dell'ordine.",
         },
+        ja: {
+            t1: "ありがとうございます！",
+            t2: "ご注文を承りました！",
+            t3: "専門家がお客様に連絡し、注文の詳細を確認します。",
+        },
         ms: {
             t1: "Terima kasih awak!",
             t2: "Pesanan anda telah diterima!",
