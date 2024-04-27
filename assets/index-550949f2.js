@@ -50,7 +50,7 @@
         <div class="price">
             <div class="old_price price_value">
                 <span class="price_text">{old_price}:</span>
-                <span class="old_price-value">{old_price_value}</>
+                <span class="old_price-value">{old_price_value}</span>
             </div>
             <div class="new_price price_value">
                 <span class="price_text">{new_price}:</span>
