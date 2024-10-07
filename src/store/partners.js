@@ -5,6 +5,7 @@ import createStoreObject from "@/classes/storage_object";
 export const usePartnersStore = defineStore("partners", () => {
     const partners = {
         adcombo: "Adcombo",
+        cpagetti: "CPAgetti",
         drcash: "dr.cash",
         everad: "Everad",
         kma: "KMA",
