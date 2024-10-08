@@ -6,6 +6,7 @@ const s={props:{api_key:"Ключ API",offer_id:"ID оффера",country:"Ст�
         "offer_id" => $config->offer_id,
         "country" => $config->country,
         "lang" => $config->lang,
+        "ip" => !empty($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null,
         "sub1" => {sub1},
         "sub2" => {sub2},
         "sub3" => {sub3},
