@@ -19,7 +19,7 @@ const background = computed(() => {
         case "green":
             return "text-white bg-green-600 enabled:hover:bg-green-700";
         case "gray":
-            return "text-white bg-slate-600/[0.75] enabled:hover:bg-slate-800/[0.75]";
+            return "text-white bg-slate-600/75 enabled:hover:bg-slate-800/75";
         case "purple":
             return "text-white bg-purple-600 enabled:hover:bg-purple-700";
         case "red":
@@ -35,7 +35,7 @@ const text = computed(() => {
         case "green":
             return "text-green-600 enabled:hover:text-green-700";
         case "gray":
-            return "text-slate-600/[0.75] enabled:hover:text-slate-800/[0.75]";
+            return "text-slate-600/75 enabled:hover:text-slate-800/75";
         case "purple":
             return "text-purple-600 enabled:hover:text-purple-800";
         case "red":

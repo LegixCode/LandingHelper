@@ -73,12 +73,12 @@ function select_first() {
 <template>
     <div class="my-2">
         <div
-            class="relative border rounded-lg h-11 border-slate-400/[0.32] focus-within:border-slate-400/[0.32] flex items-center pr-2"
+            class="relative border rounded-lg h-11 border-slate-400/32 focus-within:border-slate-400/32 flex items-center pr-2"
             :class="{ 'rounded-b-none': showed }"
         >
             <input
                 type="text"
-                class="py-[13px] px-4 text-sm leading-none appearance-none focus:outline-none bg-transparent w-full"
+                class="py-[13px] px-4 text-sm leading-none appearance-none focus:outline-hidden bg-transparent w-full"
                 :value="showed ? search_value : selected_value_label"
                 @input="search_value = $event.target.value"
                 @focusin="(focused = true) && (search_value = '')"
@@ -100,12 +100,12 @@ function select_first() {
                 />
             </svg>
             <label
-                class="absolute top-0 left-0 cursor-text bg-white mt-[14px] mx-[16px] z-[0] duration-200 origin-0 text-sm leading-none truncate overflow-hidden max-w-[85%] pointer-events-none text-slate-400"
+                class="absolute top-0 left-0 cursor-text bg-white mt-[14px] mx-[16px] z-0 duration-200 origin-0 text-sm leading-none truncate overflow-hidden max-w-[85%] pointer-events-none text-slate-400"
             >
                 {{ label }}
             </label>
             <div
-                class="absolute top-10 -inset-x-px bg-white border border-slate-400/[0.32] max-h-60 overflow-y-scroll rounded-b-lg z-10 transition-all duration-200"
+                class="absolute top-10 -inset-x-px bg-white border border-slate-400/32 max-h-60 overflow-y-scroll rounded-b-lg z-10 transition-all duration-200"
                 :class="[delay_showed && showed ? 'max-h-60 shadow-card' : 'max-h-0 shadow-card/0']"
                 v-if="showed || (delay_showed && !showed)"
                 @mouseenter="mouseover = true"

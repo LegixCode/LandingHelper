@@ -100,11 +100,14 @@ export const usePartnersStore = defineStore("partners", () => {
         () => {
             import("prettier/standalone").then((prettier) => {
                 import("@prettier/plugin-php/standalone").then((phpPlugin) => {
-                    formated_order_file.value = prettier.format(order_file.value, {
-                        plugins: [phpPlugin],
-                        parser: "php",
-                        printWidth: 120,
-                    });
+                    prettier
+                        .format(order_file.value, {
+                            plugins: [phpPlugin],
+                            parser: "php",
+                            printWidth: 120,
+                            phpVersion: "8.1",
+                        })
+                        .then((formatedLines) => (formated_order_file.value = formatedLines));
                 });
             });
         }

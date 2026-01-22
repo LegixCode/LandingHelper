@@ -27,7 +27,7 @@ function loadPage() {
                 ></iframe>
             </div>
         </div>
-        <div class="order-first lg:order-none">
+        <div class="order-first lg:order-0">
             <div class="flex flex-col">
                 <SearchSelect
                     label="Язык"

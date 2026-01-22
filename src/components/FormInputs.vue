@@ -21,7 +21,7 @@ function copy_form_params() {
                 <p v-for="(value, name) of subs">&ltinput type="hidden" name="{{ name }}" value="{{ value }}" /&gt</p>
             </code>
         </div>
-        <div class="order-first lg:order-none grid grid-cols-2 gap-x-6">
+        <div class="order-first lg:order-0 grid grid-cols-2 gap-x-6">
             <Input v-for="(value, name) of subs" :label="name" v-model.trim="subs[name]" />
         </div>
     </div>

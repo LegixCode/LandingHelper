@@ -35,7 +35,7 @@ const store = usePartnersStore();
                 </div>
             </div>
         </div>
-        <div class="order-first lg:order-none self-start">
+        <div class="order-first lg:order-0 self-start">
             <div class="flex flex-col">
                 <Select label="ПП" v-model="store.config.name">
                     <option v-for="(label, name) of store.partners" :key="name" :value="name">{{ label }}</option>

@@ -60,7 +60,7 @@ function copy_form() {
             </div>
             <div v-html="iframe_code.replace('{form_inputs}', '')"></div>
         </div>
-        <div class="order-first lg:order-none">
+        <div class="order-first lg:order-0">
             <div class="flex flex-col">
                 <SearchSelect
                     label="Язык"
