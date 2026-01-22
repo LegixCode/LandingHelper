@@ -43,22 +43,25 @@ export const useSuccessPagesStore = defineStore("success_pages", () => {
         return current_page_template.value.replaceAll(/{(\w)+}/g, (match) => {
             if (match == "{pixel}")
                 if (!config.value.fb_pixel) return "";
-                else
+                else {
+                    const pixel = `<?= $_REQUEST["pixel"]; ?>`;
+                    const event = `<?= !empty($_REQUEST["event"]) && $_REQUEST["event"] != '{event}' ? $_REQUEST["event"] : 'Lead'; ?>`;
                     return `
         <!-- Facebook Pixel Code -->
         \<script>
         !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-        document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        n.callMethod.apply(n,arguments):n.queue.push(arguments);};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s);}(window,
+        document,"script","https://connect.facebook.net/en_US/fbevents.js");
     
-        fbq('init', '<?= $_REQUEST["pixel"]; ?>');
-        fbq('track', 'Lead');
+        fbq("init", "${pixel}");    
+        fbq("track", "${event}");
         \<\/script>
-        <img height="1" width="1" src="https://www.facebook.com/tr?id=<?= $_REQUEST['pixel']; ?>&ev=Lead&noscript=1" />
+        <img height="1" width="1" src="https://www.facebook.com/tr?id=${pixel}&ev=${event}&noscript=1" />
         <!-- End Facebook Pixel Code -->
             `;
+                }
             if (match == "{name}") return '<?= $_REQUEST["name"]; ?>';
             if (match == "{phone}") return '<?= $_REQUEST["phone"]; ?>';
             return match;

@@ -82,10 +82,10 @@ export const usePartnersStore = defineStore("partners", () => {
             `;
         template += partner.value.template.replaceAll(/{(\w)+}/g, (match: string) => {
             if (match == "{success_page}")
-                return `header("Location: success.php?pixel=" . urlencode($_POST["pixel"]) . "&name=" . urlencode($_POST["name"]) . "&phone=" . urlencode($_POST["phone"]) . "&referer=" . urlencode($_SERVER['HTTP_REFERER']));`;
+                return `header("Location: success.php?pixel=" . urlencode($_POST["pixel"]) . "&event=" . urlencode($_POST["event"]) . "&name=" . urlencode($_POST["name"]) . "&phone=" . urlencode($_POST["phone"]) . "&referer=" . urlencode($_SERVER['HTTP_REFERER']));`;
             if (match == "{write_log}")
                 return config.value.write_log ? `write_log(json_encode($request_params), $result);` : "";
-            var _match = match.substring(1, match.length - 1);
+            const _match = match.substring(1, match.length - 1);
             if (partner_subs.value.value[_match] !== undefined)
                 return partner_subs.value.value[_match].length
                     ? '$_POST["' + partner_subs.value.value[_match] + '"]'
