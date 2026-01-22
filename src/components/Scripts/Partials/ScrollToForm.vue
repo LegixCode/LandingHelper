@@ -1,7 +1,7 @@
-<script setup>
-import Button from "@/components/ui/Button.vue";
-import saveFile from "@/classes/saveFile.js";
+<script setup lang="ts">
+import BaseButton from "@/components/ui/BaseButton.vue";
 import StatusButton from "@/components/ui/StatusButton.vue";
+import saveFile from "@/classes/saveFile.ts";
 import { ref, computed } from "vue";
 
 var minify_example = ref(false);
@@ -13,20 +13,20 @@ var example = computed(() => {
 function save() {
     minify_example.value = false;
 
-    toClipboard(
-        import("@/classes/scripts/scroll_to_form.js")
+    window.toClipboard(
+        import("@/classes/scripts/scroll_to_form.ts")
             .then((obj) => {
                 saveFile("scroll_to_form.js", obj.scroll_to_form);
             })
             .then(() => example.value)
     );
 }
-var minify_status = ref(null);
+var minify_status = ref<"processing" | "error" | null>(null);
 function save_minify() {
     minify_example.value = true;
     minify_status.value = "processing";
-    toClipboard(
-        import("@/classes/scripts/scroll_to_form.js")
+    window.toClipboard(
+        import("@/classes/scripts/scroll_to_form.ts")
             .then((obj) => {
                 import("terser")
                     .then((terser) => {
@@ -50,7 +50,7 @@ function save_minify() {
     <div class="shadow-card rounded-lg p-6 space-y-3">
         <div class="flex items-center">
             <div class="font-bold">scroll_to_form.js</div>
-            <Button color="green" @click="save" class="ml-auto">Скачать</Button>
+            <BaseButton color="green" class="ml-auto" @click="save">Скачать</BaseButton>
             <StatusButton default-text=".min.js" default-color="green" :status="minify_status" @click="save_minify" />
         </div>
         <div class="text-[13px] text-slate-600 indent-8">
@@ -64,7 +64,9 @@ function save_minify() {
             <div
                 class="absolute right-0 inset-y-0 flex items-center group-hover:opacity-100 transition-opacity opacity-0"
             >
-                <Button color="purple" v-clipboard="() => example" class="bg-slate-200/90 rounded-xl"> Скопировать </Button>
+                <BaseButton v-clipboard="() => example" color="purple" class="bg-slate-200/90 rounded-xl">
+                    Скопировать
+                </BaseButton>
             </div>
         </div>
         <div class="text-[13px] text-slate-600">

@@ -1,35 +1,37 @@
-<script setup>
+<script setup lang="ts">
 import { computed, ref, watch } from "vue";
 
-const emit = defineEmits(["update:modelValue"]);
-const props = defineProps({
-    modelValue: {},
-    label: String,
-    options: Object,
-    trackBy: {},
-    labelBy: {},
-    searchBy: Function,
-});
+const modelValue = defineModel<string>({ required: true });
 
-function trackBy(option) {
+type TOption = string | { [key: string]: string };
+
+const props = defineProps<{
+    label: string;
+    options: TOption[];
+    trackBy?: string | ((value: TOption) => string) | null;
+    labelBy?: string | ((value: TOption) => string) | null;
+    searchBy: (value: TOption) => string;
+}>();
+
+function trackBy(option: TOption) {
     if (typeof props.trackBy == "function") return props.trackBy(option);
     if (typeof props.trackBy == "string") return option[props.trackBy];
     if (typeof option == "object") return option.value;
     return option;
 }
 
-function labelBy(option) {
+function labelBy(option: TOption) {
     if (typeof props.labelBy == "function") return props.labelBy(option);
     if (typeof props.labelBy == "string") return option[props.labelBy];
     if (typeof option == "object") return option.label;
     return option;
 }
-function searchBy(option) {
+function searchBy(option: TOption) {
     if (props.searchBy) return props.searchBy(option);
     return labelBy(option);
 }
 
-const input = ref();
+const input = ref<HTMLInputElement>();
 
 const focused = ref(false);
 const mouseover = ref(false);
@@ -45,7 +47,7 @@ watch(
 const search_value = ref("");
 
 const selected_value_label = computed(() => {
-    var option = props.options.find((option) => trackBy(option) == props.modelValue);
+    var option = props.options.find((option) => trackBy(option) == modelValue.value);
     if (option) return labelBy(option);
     return null;
 });
@@ -59,14 +61,14 @@ const options = computed(() => {
     return sorted_options.value.filter((option) => searchBy(option).toLowerCase().indexOf(_search_value) !== -1);
 });
 
-function select(option) {
+function select(option: TOption) {
     input.value.blur();
     mouseover.value = false;
-    emit("update:modelValue", trackBy(option));
+    modelValue.value = trackBy(option);
 }
 
 function select_first() {
-    if (options.value.length > 0) select(options.value[0]);
+    if (options.value.length) select(options.value[0] as TOption);
 }
 </script>
 
@@ -77,14 +79,14 @@ function select_first() {
             :class="{ 'rounded-b-none': showed }"
         >
             <input
+                v-on:keyup.enter="select_first"
+                ref="input"
                 type="text"
                 class="py-[13px] px-4 text-sm leading-none appearance-none focus:outline-hidden bg-transparent w-full"
                 :value="showed ? search_value : selected_value_label"
-                @input="search_value = $event.target.value"
+                @input="(event: InputEvent) => (search_value = (event.target as HTMLInputElement).value)"
                 @focusin="(focused = true) && (search_value = '')"
                 @focusout="focused = false"
-                v-on:keyup.enter="select_first"
-                ref="input"
             />
             <svg
                 xmlns="http://www.w3.org/2000/svg"

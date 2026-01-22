@@ -1,10 +1,10 @@
-<script setup>
-import saveFile from "@/classes/saveFile.js";
-import languages from "@/classes/languages";
-import Button from "./ui/Button.vue";
-import Toggle from "./ui/Toggle.vue";
-import { useSuccessPagesStore } from "@/store/success_pages";
+<script setup lang="ts">
+import BaseButton from "./ui/BaseButton.vue";
+import BaseToggle from "./ui/BaseToggle.vue";
 import SearchSelect from "./ui/SearchSelect.vue";
+import languages from "@/classes/languages";
+import saveFile from "@/classes/saveFile.ts";
+import { useSuccessPagesStore } from "@/store/success_pages";
 
 const store = useSuccessPagesStore();
 
@@ -17,8 +17,8 @@ function loadPage() {
         <div class="rounded-lg shadow-card border border-slate-100 p-6 col-span-2">
             <div class="flex gap-3 pb-6 items-center">
                 <div class="font-bold">success.php</div>
-                <Button color="purple" v-clipboard="store.getCompletedTemplate" class="ml-auto">Скопировать</Button>
-                <Button color="green" @click="loadPage">Скачать</Button>
+                <BaseButton color="purple" v-clipboard="store.getCompletedTemplate" class="ml-auto">Скопировать</BaseButton>
+                <BaseButton color="green" @click="loadPage">Скачать</BaseButton>
             </div>
             <div>
                 <iframe
@@ -41,7 +41,7 @@ function loadPage() {
                     :search-by="(item) => item.label + ' ' + item.value"
                 />
                 <div class="flex items-center gap-3 text-sm text-slate-800">
-                    <Toggle v-model="store.config.fb_pixel" /> Добавить FB pixel
+                    <BaseToggle v-model="store.config.fb_pixel" /> Добавить FB pixel
                 </div>
             </div>
             <div class="grid grid-cols-2 gap-6 mt-6">

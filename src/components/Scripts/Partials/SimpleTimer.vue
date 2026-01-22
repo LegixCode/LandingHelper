@@ -1,23 +1,23 @@
-<script setup>
-import Button from "@/components/ui/Button.vue";
-import saveFile from "@/classes/saveFile.js";
+<script setup lang="ts">
+import BaseButton from "@/components/ui/BaseButton.vue";
+import saveFile from "@/classes/saveFile.ts";
 
 function copy() {
-    toClipboard(
-        import("@/classes/scripts/simple_timer.js").then(
+    window.toClipboard(
+        import("@/classes/scripts/simple_timer.ts").then(
             (obj) => "<" + "script>\n" + obj.simple_timer + "<" + "/script>"
         )
     );
 }
 
 function save() {
-    toClipboard(
-        import("@/classes/scripts/simple_timer.js")
+    window.toClipboard(
+        import("@/classes/scripts/simple_timer.ts")
             .then((obj) => {
                 saveFile("simple_timer.js", obj.simple_timer);
                 return obj;
             })
-            .then((obj) => "<" + 'script src="js/simple_timer.js">' + "<" + "/script>")
+            .then((obj) => "<" + 'script src="js/simple_timer.ts">' + "<" + "/script>")
     );
 }
 </script>
@@ -25,8 +25,8 @@ function save() {
     <div class="shadow-card rounded-lg p-6 space-y-3">
         <div class="flex flex-wrap items-center">
             <div class="font-bold">simple_timer.js</div>
-            <Button color="purple" @click="copy" class="ml-auto">Скопировать</Button>
-            <Button color="green" @click="save">Скачать</Button>
+            <BaseButton color="purple" class="ml-auto" @click="copy">Скопировать</BaseButton>
+            <BaseButton color="green" @click="save">Скачать</BaseButton>
         </div>
         <div class="text-[13px] text-slate-600 indent-8">
             Простой скрипт для вывода таймера. Обратите внимание, скрипт должен располагаться после мест где будет
@@ -47,8 +47,8 @@ function save() {
         </div>
         <div class="text-[13px] text-slate-600 indent-8">
             Если в элементе, класс которого передан первым параметров, присутствуют элементы с классами
-            <b>"minutes"</b> и <b>"seconds"</b>, то скрипт распределит минуты, секунды и часы (класс <b>"hours"</b>) по ним, иначе заменит всё содержимое
-            элемента на таймер.
+            <b>"minutes"</b> и <b>"seconds"</b>, то скрипт распределит минуты, секунды и часы (класс <b>"hours"</b>) по
+            ним, иначе заменит всё содержимое элемента на таймер.
         </div>
     </div>
 </template>

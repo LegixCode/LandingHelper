@@ -1,6 +1,6 @@
-<script setup>
-import ScrollToForm from './Partials/ScrollToForm.vue';
+<script setup lang="ts">
 import DTimeNums from './Partials/DTimeNums.vue';
+import ScrollToForm from './Partials/ScrollToForm.vue';
 import SimpleTimer from './Partials/SimpleTimer.vue';
 
 </script>

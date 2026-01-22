@@ -1,14 +1,15 @@
-<script setup>
+<script setup lang="ts">
+import BaseButton from "@/components/ui/BaseButton.vue";
+import type { TColor } from "@/types/Color.ts";
 import { ref, watch } from "vue";
-import Button from "./Button.vue";
 
-const props = defineProps({
-    status: String,
-    defaultText: String,
-    defaultColor: String,
-});
+const props = defineProps<{
+    status: "processing" | "error" | "success" | null;
+    defaultText: string;
+    defaultColor: TColor;
+}>();
 
-const color = ref(props.defaultColor);
+const color = ref<TColor>(props.defaultColor);
 const text = ref(props.defaultText);
 
 watch(() => props.status, handle);
@@ -34,5 +35,5 @@ function handle() {
 }
 </script>
 <template>
-    <Button :color="color">{{ text }}</Button>
+    <BaseButton :color="color">{{ text }}</BaseButton>
 </template>

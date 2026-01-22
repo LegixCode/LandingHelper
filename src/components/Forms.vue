@@ -1,20 +1,20 @@
-<script setup>
-import { computed } from "vue";
-import { countryNumbers } from "@/classes/countryNumbers";
-import languages from "@/classes/languages";
-import countries from "@/classes/countries";
+<script setup lang="ts">
+import BaseButton from "@/components/ui/BaseButton.vue";
+import BaseInput from "@/components/ui/BaseInput.vue";
+import BaseToggle from "@/components/ui/BaseToggle.vue";
+import SearchSelect from "@/components/ui/SearchSelect.vue";
 import basic_phrases from "@/classes/forms/basic_phrases";
+import countries from "@/classes/countries.ts";
+import languages from "@/classes/languages.ts";
+import { computed } from "vue";
+import { countryNumbers } from "@/classes/countryNumbers.ts";
 import { useFormSubsStore } from "@/store/form_subs";
 import { useFormsStore } from "@/store/forms";
-import Button from "@/components/ui/Button.vue";
-import Toggle from "@/components/ui/Toggle.vue";
-import Input from "@/components/ui/Input.vue";
-import SearchSelect from "@/components/ui/SearchSelect.vue";
 
 const store = useFormsStore();
 
 const template = computed(() => {
-    return store.current_form.template.replaceAll(/{(\w)+}/g, (match) => {
+    return store.currentForm.template.replaceAll(/{(\w)+}/g, (match) => {
         if (match == "{old_price_value}") return store.config.old_price;
         if (match == "{new_price_value}") return store.config.new_price;
         if (match == "{form_inputs}") return match;
@@ -24,8 +24,8 @@ const template = computed(() => {
             return "+" + countryNumbers[store.config.country_alpha2].code;
         }
         var _match = match.substring(1, match.length - 1);
-        if (store.current_form.translates && store.current_form.translates[store.config.language] !== undefined)
-            return store.current_form.translates[store.config.language][_match] ?? "";
+        if (store.currentForm.translates && store.currentForm.translates[store.config.language] !== undefined)
+            return store.currentForm.translates[store.config.language][_match] ?? "";
         if (basic_phrases[store.config.language] !== undefined)
             return basic_phrases[store.config.language][_match] ?? "";
         return match;
@@ -34,16 +34,16 @@ const template = computed(() => {
 
 const iframe_code = computed(() => {
     return `
-            <style>${store.current_form.style}</style>
+            <style>${store.currentForm.style}</style>
             ${template.value}
     `;
 });
 
 function copy_style() {
-    toClipboard(`<style>${store.current_form.style}</style>`);
+    window.toClipboard(`<style>${store.currentForm.style}</style>`);
 }
 function copy_form() {
-    toClipboard(template.value.replace("{form_inputs}", useFormSubsStore().getInputs()));
+    window.toClipboard(template.value.replace("{form_inputs}", useFormSubsStore().getInputs()));
 }
 </script>
 <template>
@@ -51,12 +51,12 @@ function copy_form() {
         <div class="rounded-lg shadow-card border border-slate-100 p-6 col-span-2">
             <div class="flex gap-3 pb-6 items-center">
                 <div class="font-bold">Форма</div>
-                <Button color="purple" @click="copy_style" class="ml-auto">Скопировать стили</Button>
-                <Button color="purple" @click="copy_form">Скопировать форму</Button>
+                <BaseButton color="purple" @click="copy_style" class="ml-auto">Скопировать стили</BaseButton>
+                <BaseButton color="purple" @click="copy_form">Скопировать форму</BaseButton>
             </div>
-            <div v-if="store.current_form.scripts" class="text-[13px] text-slate-600 text-center -mt-6 pb-6">
+            <div v-if="store.currentForm.scripts" class="text-[13px] text-slate-600 text-center -mt-6 pb-6">
                 Выбранная форма требует обязательной установки следующих скриптов:
-                <b>{{ store.current_form.scripts.map((s) => s + ".js").join(",") }}</b>
+                <b>{{ store.currentForm.scripts.map((s) => s + ".js").join(",") }}</b>
             </div>
             <div v-html="iframe_code.replace('{form_inputs}', '')"></div>
         </div>
@@ -73,15 +73,15 @@ function copy_form() {
                     "
                     :search-by="(item) => item.label + ' ' + item.value"
                 />
-                <Input label="Старая цена" v-model="store.config.old_price" />
-                <Input label="Новая цена" v-model="store.config.new_price" />
+                <BaseInput label="Старая цена" v-model="store.config.old_price" />
+                <BaseInput label="Новая цена" v-model="store.config.new_price" />
                 <div class="flex items-center gap-3 text-sm text-slate-800 my-3">
-                    <Toggle v-model="store.config.show_phone_code" /> Добавить код страны
+                    <BaseToggle v-model="store.config.show_phone_code" /> Добавить код страны
                 </div>
                 <SearchSelect
-                    label="Страна"
-                    v-model="store.config.country_alpha2"
                     v-if="store.config.show_phone_code"
+                    v-model="store.config.country_alpha2"
+                    label="Страна"
                     :options="
                         Object.keys(countryNumbers).map((alpha2) => ({
                             value: alpha2,
@@ -94,11 +94,11 @@ function copy_form() {
             <div class="grid grid-cols-2 gap-6 mt-6">
                 <div
                     class="shadow-card border-2 rounded-lg overflow-hidden cursor-pointer transition-transform hover:scale-110"
-                    v-for="form of store.available_forms"
+                    v-for="form of store.availableForms"
                     :class="[form.name == store.config.name ? 'border-teal-500' : 'border-white']"
                     @click="store.config.name = form.name"
                 >
-                    <img :src="form.preview" class="w-full" />
+                    <img :src="form.preview" alt="preview" class="w-full" />
                 </div>
             </div>
         </div>

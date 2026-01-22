@@ -1,27 +1,26 @@
-<script setup>
+<script setup lang="ts">
+import BaseButton from "@/components/ui/BaseButton.vue";
+import BaseSelect from "@/components/ui/BaseSelect.vue";
+import { getListSubs } from "@/classes/listSubs.ts";
 import { ref } from "vue";
-import { getListSubs } from "@/classes/listSubs";
-import Button from "@/components/ui/Button.vue";
-import Select from "@/components/ui/Select.vue";
 import { usePartnersStore } from "@/store/partners";
 
 const showed = ref(false);
-
 </script>
 <template>
     <div class="flex items-center">
-        <Button color="gray" class="mx-auto" @click="showed = !showed">
+        <BaseButton color="gray" class="mx-auto" @click="showed = !showed">
             {{ showed ? "Скрыть" : "Показать" }} настройки меток
-        </Button>
+        </BaseButton>
     </div>
     <div class="grid grid-cols-2 gap-x-6" v-if="showed">
-        <Select
+        <BaseSelect
             v-for="(value, label) of usePartnersStore().partner_subs.value"
             :label="label"
             v-model="usePartnersStore().partner_subs.value[label]"
         >
             <option></option>
             <option v-for="s of getListSubs()">{{ s }}</option>
-        </Select>
+        </BaseSelect>
     </div>
 </template>
