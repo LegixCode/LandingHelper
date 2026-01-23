@@ -1,4 +1,4 @@
-import type { ISuccessPage } from "@/types/SuccessPage.ts";
+import type {ISuccessPage} from "@/types/SuccessPage.ts";
 
 export const first: ISuccessPage = {
     name: "first",
@@ -18,6 +18,41 @@ export const first: ISuccessPage = {
             t1: "Thank you!",
             t2: "Your order has been accepted!",
             t3: "A specialist will contact you and confirm the order details.",
+        },
+        el: {
+            t1: "Σας ευχαριστούμε!",
+            t2: "Η παραγγελία σας έγινε δεκτή!",
+            t3: "Ένας ειδικός θα επικοινωνήσει μαζί σας και θα επιβεβαιώσει τα στοιχεία της παραγγελίας.",
+        },
+        lt: {
+            t1: "Ačiū!",
+            t2: "Jūsų užsakymas priimtas!",
+            t3: "Specialistas susisieks su jumis ir patvirtins užsakymo detales.",
+        },
+        lv: {
+            t1: "Paldies!",
+            t2: "Jūsu pasūtījums ir pieņemts!",
+            t3: "Speciālists ar jums sazināsies un apstiprinās pasūtījuma detaļas.",
+        },
+        bg: {
+            t1: "Благодарим ви!",
+            t2: "Вашата поръчка беше приета!",
+            t3: "Наш специалист ще се свърже с вас и ще потвърди детайлите на поръчката.",
+        },
+        sr: {
+            t1: "Хвала вам!",
+            t2: "Ваша поруџбина је прихваћена!",
+            t3: "Специјалиста ће вас контактирати и потврдити детаље поруџбине.",
+        },
+        sl: {
+            t1: "Hvala!",
+            t2: "Vaše naročilo je bilo sprejeto!",
+            t3: "Strokovnjak vas bo kontaktiral in potrdil podrobnosti naročila.",
+        },
+        hr: {
+            t1: "Hvala vam!",
+            t2: "Vaša je narudžba prihvaćena!",
+            t3: "Specijalist će vas kontaktirati i potvrditi detalje narudžbe.",
         },
         cs: {
             t1: "Děkuji!",
